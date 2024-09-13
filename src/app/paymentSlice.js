@@ -18,15 +18,15 @@ export const slice = createSlice({
           holderNameRequired: true,
           name: "Credit or debit card",
           amount: {
-            value: 10000, // 100€ in minor units
+            value: 10000,
             currency: "EUR",
           },
         },
       },
       locale: "en_US",
       showPayButton: true,
-      clientKey: process.env.REACT_APP_ADYEN_CLIENT_KEY,
-      environment: "test",
+      clientKey: 'test_XSKNRDPO7BFXDDE3MGFUT4MQSU6KRQXR',
+      environment: "TEST",
     },
   },
   reducers: {
@@ -57,22 +57,25 @@ export const slice = createSlice({
 export const {paymentSession, clearPaymentSession, paymentDataStore} = slice.actions;
 
 export const initiateCheckout = (type) => async (dispatch) => {
-  const response = await fetch(`/api/sessions?type=${type}`, {
+  const response = await fetch(`https://pos.altechsolutions.al/api/sessions?type=${type}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
   });
+  console.log('1111111111111111111----------------response')
+  console.log(response)
   dispatch(paymentSession([await response.json(), response.status]));
 };
 
 export const getPaymentDataStore = () => async (dispatch) => {
-  const response = await fetch("/api/getPaymentDataStore");
+  const response = await fetch("https://pos.altechsolutions.al/api/getPaymentDataStore");
+
   dispatch(paymentDataStore([await response.json(), response.status]));
 };
 
 export const cancelOrRefundPayment = (orderRef) => async (dispatch) => {
-  await fetch(`/api/cancelOrRefundPayment?orderRef=${orderRef}`, {
+  await fetch(`https://pos.altechsolutions.al/api/cancelOrRefundPayment?orderRef=${orderRef}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

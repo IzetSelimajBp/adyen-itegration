@@ -3,23 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@adyen/adyen-web": "^5.55.1",
-    "@adyen/api-library": "^16.1.0",
+    "@adyen/adyen-web": "5.60.0",
+    "@adyen/api-library": "^19.2.0",
     "@reduxjs/toolkit": "^2.0.1",
-    "axios": "^1.7.5",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "dotenv-cli": "^7.3.0",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "morgan": "^1.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.4",
-    "react-router": "^6.21.0",
-    "react-router-dom": "^6.21.0",
+    "react-router": "^6.26.1",
+    "react-router-dom": "^6.26.1",
     "uuidv4": "^6.2.13"
   },
   "scripts": {
-    "start": "dotenv -e .env react-scripts start",
+    "start": "PORT=4048 dotenv -e .env react-scripts start",
     "build": "dotenv -e .env react-scripts build",
     "test": "dotenv -e .env react-scripts test",
     "eject": "react-scripts eject",
@@ -42,8 +43,12 @@
     ]
   },
   "options": {
-    "allowedHosts": ["localhost", ".localhost", "*"],
-    "proxy": "http://localhost:8088"
+    "allowedHosts": [
+      "localhost",
+      ".localhost",
+      "*"
+    ],
+    "proxy": "*"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",

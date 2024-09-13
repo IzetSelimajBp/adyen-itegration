@@ -59,13 +59,11 @@ const Checkout = () => {
         onPaymentCompleted: (response, _component) =>
           navigate(getRedirectUrl(response.resultCode), { replace: true }),
         onError: (error, _component) => {
-          console.error(error);
           navigate(`/status/error?reason=${error.message}`, { replace: true });
         },
       });
 
-      // The 'ignore' flag is used to avoid double re-rendering caused by React 18 StrictMode
-      // More about it here: https://beta.reactjs.org/learn/synchronizing-with-effects#fetching-data
+
       if (paymentContainer.current && !ignore) {
         checkout.create(type).mount(paymentContainer.current);
       }
@@ -79,8 +77,6 @@ const Checkout = () => {
   }, [payment, type, navigate])
 
   return (
-    <div className="payment-container">
       <div ref={paymentContainer} className="payment"></div>
-    </div>
   );
 }
